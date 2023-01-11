@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/verde"
-    tools:context=".LoginActivity">
+    tools:context=".activity.LoginActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -64,15 +64,15 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
+        android:backgroundTint="@color/aux_secundario"
+        android:onClick="validarAutenticacaoUsuario"
         android:text="@string/txt_btn_entrar"
+        android:textColor="@color/white"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputSenha"
 
-        android:textColor="@color/white"
-        android:backgroundTint="@color/aux_secundario"
-
-        />
+        app:layout_constraintTop_toBottomOf="@+id/inputSenha" />
 
     <TextView
         android:id="@+id/textView2"
