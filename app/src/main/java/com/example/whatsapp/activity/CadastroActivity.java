@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.whatsapp.R;
 import com.example.whatsapp.config.ConfiguracaoFirebase;
+import com.example.whatsapp.helper.Base64Custom;
 import com.example.whatsapp.model.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -18,6 +19,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
+
+import java.util.Base64;
 
 public class CadastroActivity extends AppCompatActivity {
 
@@ -48,6 +51,17 @@ public class CadastroActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     Toast.makeText(CadastroActivity.this, "Conta salva com sucesso!", Toast.LENGTH_SHORT).show();
                     finish();
+
+                    try {
+
+                        String identificadorUsuario = Base64Custom.codificarBase64( usuario.getEmail() );
+                        usuario.setUid(identificadorUsuario);
+                        usuario.salvar();
+
+                    } catch (Exception e){
+                        e.printStackTrace();
+                    }
+
                 } else {
 
                     String execucao = "";
