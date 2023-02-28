@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.example.whatsapp.R;
 import com.example.whatsapp.config.ConfiguracaoFirebase;
 import com.example.whatsapp.helper.Base64Custom;
+import com.example.whatsapp.helper.UsuarioFirebase;
 import com.example.whatsapp.model.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -35,8 +36,6 @@ public class CadastroActivity extends AppCompatActivity {
         campoNome = findViewById(R.id.inputNomeCadastro);
         campoEmail = findViewById(R.id.inputEmailCadastro);
         campoSenha = findViewById(R.id.inputSenhaCadastro);
-
-
     }
 
     public void cadastrarUsuarioFirebase(Usuario usuario) {
@@ -50,6 +49,9 @@ public class CadastroActivity extends AppCompatActivity {
 
                 if (task.isSuccessful()) {
                     Toast.makeText(CadastroActivity.this, "Conta salva com sucesso!", Toast.LENGTH_SHORT).show();
+
+                    UsuarioFirebase.atualizarNomeUsuario(usuario.getNome());
+
                     finish();
 
                     try {

@@ -21,8 +21,8 @@ public class UsuarioFirebase {
     }
 
     public static FirebaseUser getUsuarioAtual () {
-
-        return ConfiguracaoFirebase.getFirebaseAutenticacao().getCurrentUser();
+        FirebaseAuth usuario = ConfiguracaoFirebase.getFirebaseAutenticacao();
+        return usuario.getCurrentUser();
     }
 
     public static boolean atualizarFotoUsuario (Uri uri) {
@@ -38,6 +38,29 @@ public class UsuarioFirebase {
                 public void onComplete(@NonNull Task<Void> task) {
                     if (!task.isSuccessful()) {
                         Log.d("Perfil", "Erro ao adicionar foto de perfil");
+                    }
+                }
+            });
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static boolean atualizarNomeUsuario (String nome) {
+
+        try {
+            FirebaseUser user = getUsuarioAtual();
+            UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
+                    .setDisplayName(nome)
+                    .build();
+
+            user.updateProfile( profileChangeRequest ).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (!task.isSuccessful()) {
+                        Log.d("Perfil", "Erro ao adicionar nome de perfil");
                     }
                 }
             });

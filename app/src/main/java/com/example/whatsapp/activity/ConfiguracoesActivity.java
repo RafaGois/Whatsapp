@@ -201,6 +201,5 @@ public class ConfiguracoesActivity extends AppCompatActivity {
 
         AlertDialog dialog = builder.create();
         dialog.show();
-
     }
 }
